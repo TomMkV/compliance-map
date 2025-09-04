@@ -1,0 +1,48 @@
+[
+  {
+    "id": "enterprise-saas",
+    "name": "Enterprise SaaS (Baseline)",
+    "description": "Close enterprise deals with credible security/privacy posture.",
+    "weights": { "Security": 0.45, "Privacy": 0.25, "BCM": 0.15, "ServiceMgmt": 0.05, "RiskGovernance": 0.05, "AIGovernance": 0.05 },
+    "phases": [
+      { "name": "Foundation", "items": ["ISO-27001"] },
+      { "name": "Privacy", "items": ["ISO-27701", "ISO-27018"] },
+      { "name": "Cloud Hardening", "items": ["ISO-27017"] },
+      { "name": "Resilience", "items": ["ISO-22301"] }
+    ]
+  },
+  {
+    "id": "gov-supplier",
+    "name": "Government Supplier (Generic)",
+    "description": "General gov-supplier orientation; add jurisdictional overlays later.",
+    "weights": { "Security": 0.4, "BCM": 0.25, "RiskGovernance": 0.15, "Privacy": 0.15, "ServiceMgmt": 0.05 },
+    "required": ["ISO-27001"],
+    "phases": [
+      { "name": "Baseline Security", "items": ["ISO-27001"] },
+      { "name": "Resilience", "items": ["ISO-22301"] },
+      { "name": "Privacy", "items": ["ISO-27701"] }
+    ]
+  },
+  {
+    "id": "pii-processor",
+    "name": "PII Processor (Public Cloud)",
+    "description": "Operate with PII in public cloud responsibly.",
+    "weights": { "Privacy": 0.45, "Security": 0.3, "BCM": 0.15, "AIGovernance": 0.05, "RiskGovernance": 0.05 },
+    "phases": [
+      { "name": "Foundation", "items": ["ISO-27001"] },
+      { "name": "Privacy Controls", "items": ["ISO-27701", "ISO-27018"] },
+      { "name": "Cloud Security", "items": ["ISO-27017"] },
+      { "name": "Resilience", "items": ["ISO-22301"] }
+    ]
+  },
+  {
+    "id": "ai-platform",
+    "name": "AI Platform",
+    "description": "Responsible AI governance over the lifecycle.",
+    "weights": { "AIGovernance": 0.4, "Security": 0.25, "Privacy": 0.2, "RiskGovernance": 0.1, "BCM": 0.05 },
+    "phases": [
+      { "name": "AI Governance", "items": ["ISO-42001"] },
+      { "name": "Security & Privacy", "items": ["ISO-27001", "ISO-27701"] }
+    ]
+  }
+]
