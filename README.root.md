@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Compliance Map
 
-## Getting Started
+A simple way to answer: “What standards matter for us, in what order, and why?”
 
-First, run the development server:
+This tool shows a graph of standards (ISO, NIST, SOC, etc.), how they relate, and a suggested path based on your goal (e.g., enterprise SaaS, PII processing, AI platform). You can filter, select a profile, and export a checklist.
+
+## What you can do
+
+- Explore standards as a map
+- Pick an outcome profile to re-weight what’s important
+- See a recommended implementation path
+- Track readiness across control families
+- Export a Markdown/CSV checklist
+- Share a permalink of your current view
+
+## Data
+
+- Main dataset: `src/data/expanded_compliance_standards.json`
+  - Nodes include: id, title, summary, url, tags, families, related edges
+  - Extra metadata (jurisdiction, enforceability, certifiable, auditable, source)
+- Profiles: `src/data/profiles.json`
+- Data is validated and normalized in `src/lib/data.ts` (Zod). Unknown edge types and families are mapped to a small set used by the app.
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# open http://localhost:3000 (Next picks a free port if 3000 is busy)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- App pages: `src/app` (`/` home, `/graph` map)
+- Graph UI: `src/components/graph/*`
+- URL state and share links: `src/lib/url-state.ts`
+- Scoring: `src/lib/scoring.ts`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Add or change standards
 
-## Learn More
+1) Edit `src/data/expanded_compliance_standards.json`
+2) Keep `id` unique. Use `related` with `target` ids from the same file.
+3) Run `npm run build` to check types.
 
-To learn more about Next.js, take a look at the following resources:
+Tip: you can also add new outcome profiles in `src/data/profiles.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Dark theme is on by default. Text uses theme variables for contrast.
+- The dataset is intentionally simple. We can add deeper control mappings later (e.g., ISO 27002 ↔ SOC 2) without changing the basic shape.
