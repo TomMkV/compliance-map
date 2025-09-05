@@ -89,6 +89,11 @@ type ExpandedNode = {
   status?: string;
   jurisdiction?: string[];
   related?: { target: string; type: string; weight?: number; note?: string; description?: string }[];
+  // augmented metadata
+  enforceability?: string;
+  certifiable?: boolean;
+  auditable?: boolean;
+  source?: string;
 };
 
 function normalizeExpanded(nodes: ExpandedNode[]): StandardNode[] {
@@ -120,9 +125,11 @@ function normalizeExpanded(nodes: ExpandedNode[]): StandardNode[] {
       families: safeFamilies,
       version: n.version,
       status: (n.status as any) as 'active' | 'deprecated' | 'superseded' | undefined,
-      jurisdiction: n.jurisdiction,
+      jurisdiction: (Array.isArray(n.jurisdiction) ? n.jurisdiction : (n.jurisdiction ? [n.jurisdiction as unknown as string] : undefined)),
       related,
     };
+    // Note: we intentionally do not put augmented metadata into StandardNode to keep the core schema tight.
+    // If needed for UI display later, we can extend StandardNode or add a parallel metadata map.
     return node;
   });
 
