@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { ControlFamily, EdgeType, OutcomeProfile, StandardNode } from '@/types/standards';
-import standardsJson from '@/data/iso-standards.json';
+import expandedJson from '@/data/expanded_compliance_standards.json';
 import profilesJson from '@/data/profiles.json';
 
 const EDGE_TYPES = ['precedes', 'complementary', 'supersedes', 'overlaps'] as const;
@@ -44,8 +44,96 @@ const OutcomeProfileSchema = z.object({
   required: z.array(z.string()).optional(),
 });
 
+// Normalize expanded dataset → canonical StandardNode
+const EDGE_TYPES_SET = new Set(EDGE_TYPES);
+const FAMILY_TYPES_SET = new Set(FAMILY_TYPES);
+
+const edgeMap: Record<string, EdgeType> = {
+  foundational: 'precedes',
+  audits: 'complementary',
+  governs: 'complementary',
+  extension: 'complementary',
+  integrates: 'complementary',
+  supplements: 'complementary',
+  aligned: 'overlaps',
+  aligns: 'overlaps',
+  mapped: 'overlaps',
+  parallel: 'overlaps',
+  sibling: 'overlaps',
+  derived: 'overlaps',
+  based_on: 'overlaps',
+};
+
+const familyMap: Record<string, ControlFamily> = {
+  Governance: 'RiskGovernance',
+  Cybersecurity: 'Security',
+  Assurance: 'RiskGovernance',
+  Compliance: 'RiskGovernance',
+  Finance: 'RiskGovernance',
+  Legal: 'RiskGovernance',
+  Regional: 'RiskGovernance',
+  Healthcare: 'RiskGovernance',
+  AuditGovernance: 'RiskGovernance',
+  Benchmark: 'Security',
+  AppSec: 'Security',
+};
+
+type ExpandedNode = {
+  id: string;
+  title: string;
+  summary: string;
+  url: string;
+  tags?: string[];
+  families?: string[];
+  version?: string;
+  status?: string;
+  jurisdiction?: string[];
+  related?: { target: string; type: string; weight?: number; note?: string; description?: string }[];
+};
+
+function normalizeExpanded(nodes: ExpandedNode[]): StandardNode[] {
+  const normalized: StandardNode[] = nodes.map((n) => {
+    const familiesRaw = n.families ?? [];
+    const families = Array.from(
+      new Set(
+        familiesRaw
+          .map((f) => (FAMILY_TYPES_SET.has(f as ControlFamily) ? (f as ControlFamily) : familyMap[f] as ControlFamily))
+          .filter(Boolean)
+      )
+    ) as ControlFamily[];
+    const safeFamilies = families.length ? families : (['RiskGovernance'] as ControlFamily[]);
+
+    const related = (n.related ?? [])
+      .map((r) => {
+        const t = (EDGE_TYPES_SET.has(r.type as EdgeType) ? (r.type as EdgeType) : edgeMap[r.type]);
+        if (!t) return undefined;
+        return { target: r.target, type: t, weight: r.weight, note: r.note ?? r.description };
+      })
+      .filter(Boolean) as { target: string; type: EdgeType; weight?: number; note?: string }[];
+
+    const node: StandardNode = {
+      id: n.id,
+      title: n.title,
+      summary: n.summary,
+      url: n.url,
+      tags: n.tags ?? [],
+      families: safeFamilies,
+      version: n.version,
+      status: (n.status as any) as 'active' | 'deprecated' | 'superseded' | undefined,
+      jurisdiction: n.jurisdiction,
+      related,
+    };
+    return node;
+  });
+
+  // Validate against canonical schema
+  return z.array(StandardNodeSchema).parse(normalized);
+}
+
 export function getStandards(): StandardNode[] {
-  return z.array(StandardNodeSchema).parse(standardsJson);
+  // Accept either canonical or expanded dataset structure
+  const raw = expandedJson as unknown as ExpandedNode[];
+  return normalizeExpanded(raw);
 }
 
 export function getProfiles(): OutcomeProfile[] {

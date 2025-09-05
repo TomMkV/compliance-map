@@ -43,3 +43,11 @@ export function computeReadinessScore(selected: StandardNode[], profile: Outcome
                            .sort((a,b) => b.contribution - a.contribution);
   return { score, maxScore, percent, breakdown, drivers };
 }
+
+export function getRecommendedPath(profile: OutcomeProfile, standards: StandardNode[]): string[] {
+  const phases = profile.phases?.flatMap((p) => p.items) ?? []
+  const unique = Array.from(new Set(phases))
+  // Filter to only IDs that exist in standards
+  const idSet = new Set(standards.map((s) => s.id))
+  return unique.filter((id) => idSet.has(id))
+}

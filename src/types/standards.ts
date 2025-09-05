@@ -36,3 +36,17 @@ export interface OutcomeProfile {
   phases: { name: string; items: string[] }[];
   required?: string[];
 }
+
+// v0 integration: view-state and URL-state helpers
+export interface FilterState {
+  profile?: string;
+  families: ControlFamily[];
+  tags: string[];
+  search: string;
+  showWhyMatters: boolean;
+}
+
+export interface PathState {
+  selectedStandards: string[];
+  customOrder: string[];
+}
