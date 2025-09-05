@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { ControlFamily, EdgeType, OutcomeProfile, StandardNode } from '@/types/standards';
-import expandedJson from '@/data/expanded_compliance_standards.json';
+import finalJson from '@/data/final_compliance_map_dataset.json';
 import profilesJson from '@/data/profiles.json';
 
 const EDGE_TYPES = ['precedes', 'complementary', 'supersedes', 'overlaps'] as const;
@@ -116,6 +116,13 @@ function normalizeExpanded(nodes: ExpandedNode[]): StandardNode[] {
       })
       .filter(Boolean) as { target: string; type: EdgeType; weight?: number; note?: string }[];
 
+    const statusRaw = typeof n.status === 'string' ? n.status : undefined;
+    const statusSanitized = (statusRaw === 'active' || statusRaw === 'deprecated' || statusRaw === 'superseded')
+      ? statusRaw
+      : undefined;
+
+    const versionSanitized = (typeof n.version === 'string' && n.version.trim().length > 0) ? n.version : undefined;
+
     const node: StandardNode = {
       id: n.id,
       title: n.title,
@@ -123,8 +130,8 @@ function normalizeExpanded(nodes: ExpandedNode[]): StandardNode[] {
       url: n.url,
       tags: n.tags ?? [],
       families: safeFamilies,
-      version: n.version,
-      status: (n.status as any) as 'active' | 'deprecated' | 'superseded' | undefined,
+      version: versionSanitized,
+      status: statusSanitized,
       jurisdiction: (Array.isArray(n.jurisdiction) ? n.jurisdiction : (n.jurisdiction ? [n.jurisdiction as unknown as string] : undefined)),
       related,
     };
@@ -134,13 +141,72 @@ function normalizeExpanded(nodes: ExpandedNode[]): StandardNode[] {
   });
 
   // Validate against canonical schema
-  return z.array(StandardNodeSchema).parse(normalized);
+  const parsed = z.array(StandardNodeSchema).parse(normalized);
+
+  return augmentRelationships(parsed);
 }
 
 export function getStandards(): StandardNode[] {
   // Accept either canonical or expanded dataset structure
-  const raw = expandedJson as unknown as ExpandedNode[];
+  const raw = finalJson as unknown as ExpandedNode[];
   return normalizeExpanded(raw);
+}
+
+// --- Relationship augmentation rules for better map connectivity ---
+function augmentRelationships(nodes: StandardNode[]): StandardNode[] {
+  const byId = new Map(nodes.map((n) => [n.id, n] as const));
+
+  const add = (source: string, target: string, type: EdgeType) => {
+    const s = byId.get(source);
+    const t = byId.get(target);
+    if (!s || !t) return;
+    if (!s.related) s.related = [];
+    const exists = s.related.some((r) => r.target === target && r.type === type);
+    if (!exists) s.related.push({ target, type });
+  };
+
+  // Core ISO 27001 family
+  [
+    'ISO-27002','ISO-27003','ISO-27004','ISO-27005','ISO-27034','ISO-27035','ISO-27036','ISO-27050'
+  ].forEach((id) => add(id, 'ISO-27001', 'complementary'));
+  add('ISO-27031','ISO-22301','complementary');
+  add('ISO-22301','ISO-27001','complementary');
+  add('ISO-27018','ISO-27701','complementary');
+  add('ISO-27017','ISO-27018','complementary');
+
+  // Service management and quality
+  add('ISO-20000','ISO-27001','complementary');
+  add('ISO-20000','ISO-22301','complementary');
+  add('ISO-20000','ISO-9001','complementary');
+  add('ISO-9001','ISO-20000','overlaps');
+  add('ISO-9001','ISO-27001','overlaps');
+  add('ISO-38500','ISO-27001','complementary');
+  add('ISO-38500','ISO-20000','complementary');
+
+  // Privacy/legal
+  ['GDPR','CCPA','HIPAA'].forEach((id) => add(id,'ISO-27701','overlaps'));
+
+  // SOC
+  add('SOC2','ISO-27001','overlaps');
+  add('SOC1','SOC2','overlaps');
+  add('SOC3','SOC2','overlaps');
+
+  // NIST and companions
+  add('NIST-CSF','ISO-27001','overlaps');
+  add('NIST-SP-800-53','NIST-CSF','complementary');
+  add('CIS-Controls','NIST-CSF','overlaps');
+  add('CIS-Controls','ISO-27001','overlaps');
+  add('CSA-CCM','ISO-27017','overlaps');
+  add('CSA-CCM','NIST-CSF','overlaps');
+  add('PCI-DSS','ISO-27001','overlaps');
+  add('FedRAMP','NIST-CSF','overlaps');
+  add('SS-584','ISO-27017','overlaps');
+
+  // AI
+  add('ISO-42001','ISO-27001','complementary');
+  add('ISO-42001','ISO-27701','complementary');
+
+  return nodes;
 }
 
 export function getProfiles(): OutcomeProfile[] {

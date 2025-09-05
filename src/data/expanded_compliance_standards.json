@@ -2,950 +2,333 @@
   {
     "id": "ISO-27000",
     "title": "ISMS Overview & Vocabulary",
-    "summary": "Provides terminology and overview for the ISO/IEC 27000 family.",
+    "summary": "Defines terminology and fundamentals for the ISO/IEC 27000 series.",
     "url": "https://www.iso.org/standard/iso-iec-27000-family",
-    "tags": [
-      "Security",
-      "Foundation"
-    ],
-    "families": [
-      "Security",
-      "RiskGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "foundational"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "tags": ["Foundation","Security"],
+    "families": ["RiskGovernance","Security"],
+    "related": [{"target":"ISO-27001","type":"foundational"}],
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"ISO",
+    "version":null,
+    "status":"Informative"
   },
   {
     "id": "ISO-27001",
     "title": "Information Security Management Systems",
-    "summary": "ISMS requirements; foundational security baseline.",
+    "summary": "Specifies requirements for implementing and maintaining an ISMS.",
     "url": "https://www.iso.org/standard/27001",
-    "version": "2022",
-    "tags": [
-      "Security"
-    ],
-    "families": [
-      "Security",
-      "RiskGovernance"
-    ],
+    "tags": ["Security"],
+    "families": ["RiskGovernance","Security"],
     "related": [
-      {
-        "target": "ISO-27701",
-        "type": "precedes",
-        "weight": 0.7
-      },
-      {
-        "target": "ISO-27017",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-22301",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-27002",
-        "type": "complementary"
-      }
+      {"target":"ISO-27000","type":"foundational"},
+      {"target":"ISO-27002","type":"complementary"},
+      {"target":"ISO-27005","type":"complementary"},
+      {"target":"ISO-27701","type":"precedes","weight":0.8}
     ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":true,
+    "auditable":true,
+    "source":"ISO",
+    "version":"2022",
+    "status":"Normative"
   },
   {
     "id": "ISO-27002",
     "title": "Information Security Controls",
-    "summary": "Guidelines for implementing security controls referenced in ISO 27001.",
+    "summary": "Guidelines for security controls referenced in ISO 27001.",
     "url": "https://www.iso.org/standard/27002",
-    "tags": [
-      "Security",
-      "Controls"
-    ],
-    "families": [
-      "Security"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
-  },
-  {
-    "id": "ISO-27003",
-    "title": "ISMS Implementation Guidance",
-    "summary": "Guidance for implementing an ISMS per ISO 27001.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Implementation"
-    ],
-    "families": [
-      "Security"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-27004",
-    "title": "ISMS Monitoring & Metrics",
-    "summary": "Guidance on measuring, monitoring, and evaluating ISMS effectiveness.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Metrics"
-    ],
-    "families": [
-      "Security"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "tags": ["Core","Security"],
+    "families": ["Security"],
+    "related": [{"target":"ISO-27001","type":"complementary"}],
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"ISO",
+    "version":"2022",
+    "status":"Informative"
   },
   {
     "id": "ISO-27005",
     "title": "Information Security Risk Management",
-    "summary": "Offers a risk management approach supporting ISO 27001.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Risk"
-    ],
-    "families": [
-      "Security",
-      "RiskGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-27006",
-    "title": "ISMS Certification Bodies Requirements",
-    "summary": "Requirements for bodies certifying ISMS systems under ISO 27001.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Governance"
-    ],
-    "families": [
-      "Security",
-      "AuditGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "governs"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-27007",
-    "title": "ISMS Auditing Guidelines",
-    "summary": "Guidelines for conducting ISMS audits.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Audit"
-    ],
-    "families": [
-      "Security",
-      "AuditGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "audits"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-27008",
-    "title": "Auditor Guidelines on ISMS Controls",
-    "summary": "Guidance for auditors evaluating ISO 27002 controls.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Audit"
-    ],
-    "families": [
-      "Security",
-      "AuditGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27002",
-        "type": "audits"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "summary": "Provides structured guidance on identifying and managing information risks.",
+    "url": "https://en.wikipedia.org/wiki/ISO/IEC_27005",
+    "tags": ["Risk","Security"],
+    "families": ["RiskGovernance","Security"],
+    "related": [{"target":"ISO-27001","type":"supplements"}],
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"ISO",
+    "version":"2022",
+    "status":"Informative"
   },
   {
     "id": "ISO-27017",
     "title": "Cloud Security Controls",
-    "summary": "Cloud-specific security guidance based on ISO 27002.",
-    "url": "https://www.iso.org/standard/43757.html",
-    "tags": [
-      "Security",
-      "Cloud"
-    ],
-    "families": [
-      "Security"
-    ],
+    "summary": "Cloud-specific control guidance based on ISO 27002.",
+    "url": "https://en.wikipedia.org/wiki/ISO/IEC_27017",
+    "tags": ["Cloud","Security"],
+    "families": ["Security"],
     "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-27018",
-        "type": "complementary"
-      }
+      {"target":"ISO-27002","type":"extends"},
+      {"target":"ISO-27001","type":"complementary"}
     ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"ISO",
+    "version":"2015",
+    "status":"Informative"
   },
   {
     "id": "ISO-27018",
     "title": "PII Protection in Public Clouds",
-    "summary": "Guidelines for protecting personal data in public cloud setups.",
-    "url": "https://www.iso.org/standard/76559.html",
-    "tags": [
-      "Privacy",
-      "Cloud",
-      "PII"
+    "summary": "Guidelines protecting personally identifiable information in public cloud environments.",
+    "url": "https://en.wikipedia.org/wiki/ISO/IEC_27018",
+    "tags": ["Privacy","Cloud","PII"],
+    "families": ["Privacy"],
+    "related":[
+      {"target":"ISO-27001","type":"complementary"},
+      {"target":"ISO-27701","type":"complementary"}
     ],
-    "families": [
-      "Privacy"
-    ],
-    "related": [
-      {
-        "target": "ISO-27701",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-27017",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
-  },
-  {
-    "id": "ISO-27031",
-    "title": "ICT Readiness for Business Continuity",
-    "summary": "Guidelines for IT/communications readiness during disruptions.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Resilience",
-      "BCM"
-    ],
-    "families": [
-      "BCM",
-      "Security"
-    ],
-    "related": [
-      {
-        "target": "ISO-22301",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-27034",
-    "title": "Application Security",
-    "summary": "Framework for securing application development and usage.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "AppSec"
-    ],
-    "families": [
-      "Security"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
-  },
-  {
-    "id": "ISO-27035",
-    "title": "Information Security Incident Management",
-    "summary": "Structure and processes for incident response.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Incident"
-    ],
-    "families": [
-      "Security",
-      "RiskGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-27036",
-    "title": "Supplier Security Assurance",
-    "summary": "Standards for managing third-party supplier security.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "SupplyChain"
-    ],
-    "families": [
-      "Security"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-27050",
-    "title": "E-Discovery for ISMS",
-    "summary": "Guidelines for legal e-discovery within ISMS context.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Security",
-      "Legal"
-    ],
-    "families": [
-      "Security",
-      "Compliance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "extension"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"ISO",
+    "version":"2019",
+    "status":"Informative"
   },
   {
     "id": "ISO-27701",
     "title": "Privacy Information Management",
-    "summary": "Extends 27001 to provide PIMS for privacy governance.",
+    "summary": "Extends ISO 27001 with privacy-specific PIMS requirements.",
     "url": "https://www.iso.org/standard/85819.html",
-    "tags": [
-      "Privacy",
-      "PII"
+    "tags": ["Privacy","PII"],
+    "families": ["Privacy","RiskGovernance"],
+    "related":[
+      {"target":"ISO-27001","type":"extends"},
+      {"target":"ISO-27018","type":"supplements"}
     ],
-    "families": [
-      "Privacy",
-      "RiskGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "precedes"
-      },
-      {
-        "target": "ISO-27018",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":true,
+    "auditable":true,
+    "source":"ISO",
+    "version":null,
+    "status":"Normative"
   },
   {
-    "id": "ISO-20000",
-    "title": "IT Service Management (ITSM)",
-    "summary": "Best practices for IT service delivery and operations.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "ITSM",
-      "Service"
+    "id": "ISO-20000-1",
+    "title": "IT Service Management System Requirements",
+    "summary": "Requirements for establishing and improving IT service management.",
+    "url": "https://en.wikipedia.org/wiki/ISO/IEC_20000",
+    "tags": ["ITSM","Service"],
+    "families": ["Governance"],
+    "related":[
+      {"target":"ISO-9001","type":"aligned"},
+      {"target":"ISO-27001","type":"complementary"}
     ],
-    "families": [
-      "Governance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-22301",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-9001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-9001",
-    "title": "Quality Management Systems",
-    "summary": "Framework for quality management and continuous improvement.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Quality",
-      "Process"
-    ],
-    "families": [
-      "Governance"
-    ],
-    "related": [
-      {
-        "target": "ISO-20000",
-        "type": "overlaps"
-      },
-      {
-        "target": "ISO-27001",
-        "type": "overlaps"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "ISO-22301",
-    "title": "Business Continuity Management Systems",
-    "summary": "Resilience planning and continuity for organizational disruptions.",
-    "url": "https://www.iso.org/standard/75106.html",
-    "tags": [
-      "BCM",
-      "Resilience"
-    ],
-    "families": [
-      "BCM"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":true,
+    "auditable":true,
+    "source":"ISO",
+    "version":"2018",
+    "status":"Normative"
   },
   {
     "id": "ISO-38500",
     "title": "Corporate IT Governance",
-    "summary": "Principles for effective governance of IT in enterprises.",
-    "url": "https://www.iso.org",
-    "tags": [
-      "Governance"
+    "summary": "Principles for governing organizational IT use.",
+    "url": "https://en.wikipedia.org/wiki/ISO/IEC_38500",
+    "tags": ["Governance"],
+    "families": ["Governance"],
+    "related":[
+      {"target":"ISO-20000-1","type":"influences"}
     ],
-    "families": [
-      "Governance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-20000",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"ISO",
+    "version":"2024",
+    "status":"Normative"
   },
   {
-    "id": "ISO-42001",
-    "title": "AI Management Systems",
-    "summary": "Governance framework for responsible AI systems.",
-    "url": "https://www.iso.org/standard/42001",
-    "version": "2023",
-    "tags": [
-      "AI",
-      "Governance"
-    ],
-    "families": [
-      "AIGovernance",
-      "RiskGovernance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "complementary"
-      },
-      {
-        "target": "ISO-27701",
-        "type": "complementary"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "ISO"
-  },
-  {
-    "id": "SOC1",
-    "title": "SOC 1 Audit (Financial Controls)",
-    "summary": "Assess controls relevant to financial reporting.",
-    "url": "https://www.aicpa.org",
-    "tags": [
-      "Audit",
-      "Finance"
-    ],
-    "families": [
-      "Assurance"
-    ],
-    "related": [
-      {
-        "target": "SOC2",
-        "type": "sibling"
-      }
-    ],
-    "jurisdiction": "USA",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "AICPA"
+    "id": "ISO-12207",
+    "title": "Software Life Cycle Processes",
+    "summary": "Defines processes for development and maintenance across software lifecycle.",
+    "url": "https://en.wikipedia.org/wiki/ISO/IEC_12207",
+    "tags": ["Software","Process"],
+    "families": ["Development","Governance"],
+    "related":[],
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"ISO/IEEE",
+    "version":"2017",
+    "status":"Normative"
   },
   {
     "id": "SOC2",
     "title": "SOC 2 Trust Services Criteria",
-    "summary": "Assurance reporting on security, availability, processing integrity, confidentiality, privacy.",
+    "summary": "Audit report focusing on security, availability, confidentiality, processing integrity, and privacy.",
     "url": "https://www.aicpa.org",
-    "tags": [
-      "Security",
-      "Assurance"
-    ],
-    "families": [
-      "Security",
-      "Assurance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "overlaps"
-      }
-    ],
-    "jurisdiction": "USA",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "AICPA"
-  },
-  {
-    "id": "SOC3",
-    "title": "SOC 3 General Use Report",
-    "summary": "Publicly consumable summary of SOC 2 report.",
-    "url": "https://www.aicpa.org",
-    "tags": [
-      "Assurance",
-      "Public"
-    ],
-    "families": [
-      "Security",
-      "Assurance"
-    ],
-    "related": [
-      {
-        "target": "SOC2",
-        "type": "derived"
-      }
-    ],
-    "jurisdiction": "USA",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "AICPA"
+    "tags": ["Assurance","Security"],
+    "families": ["Assurance"],
+    "related":[{"target":"ISO-27001","type":"overlaps"}],
+    "jurisdiction":"USA",
+    "enforceability":"Voluntary",
+    "certifiable":true,
+    "auditable":true,
+    "source":"AICPA",
+    "version":null,
+    "status":"Assurance"
   },
   {
     "id": "PCI-DSS",
     "title": "Payment Card Industry Data Security Standard",
-    "summary": "Security standards for organizations processing credit card data.",
+    "summary": "Standards for protecting cardholder data in payment processing.",
     "url": "https://www.pcisecuritystandards.org",
-    "tags": [
-      "Finance",
-      "Security"
-    ],
-    "families": [
-      "Compliance",
-      "Finance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "parallel"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": true,
-    "auditable": true,
-    "source": "Other"
-  },
-  {
-    "id": "HIPAA",
-    "title": "Health Information Privacy (PHI)",
-    "summary": "US regulation protecting personal health information.",
-    "url": "https://www.hhs.gov/hipaa",
-    "tags": [
-      "Privacy",
-      "Healthcare"
-    ],
-    "families": [
-      "Legal",
-      "Compliance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27701",
-        "type": "aligns"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Mandatory",
-    "certifiable": false,
-    "auditable": true,
-    "source": "Government"
+    "tags": ["Finance","Security"],
+    "families": ["Finance","Compliance"],
+    "related":[{"target":"ISO-27001","type":"parallel"}],
+    "jurisdiction":"Global",
+    "enforceability":"Mandatory in scope",
+    "certifiable":true,
+    "auditable":true,
+    "source":"PCI SSC",
+    "version":null,
+    "status":"Normative"
   },
   {
     "id": "GDPR",
-    "title": "European Data Protection Regulation",
-    "summary": "EU regulation on personal data privacy and governance.",
+    "title": "EU General Data Protection Regulation",
+    "summary": "Regulation for personal data protection in EU; significant global impact.",
     "url": "https://gdpr.eu",
-    "tags": [
-      "Privacy",
-      "Legal",
-      "PII"
-    ],
-    "families": [
-      "Privacy",
-      "Legal"
-    ],
-    "related": [
-      {
-        "target": "ISO-27701",
-        "type": "aligns"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Mandatory",
-    "certifiable": false,
-    "auditable": true,
-    "source": "Government"
+    "tags": ["Privacy","Legal","PII"],
+    "families": ["Legal","Privacy"],
+    "related":[{"target":"ISO-27701","type":"aligns"}],
+    "jurisdiction":"EU",
+    "enforceability":"Mandatory",
+    "certifiable":false,
+    "auditable":true,
+    "source":"Government",
+    "version":"2018",
+    "status":"Regulation"
   },
   {
-    "id": "CCPA",
-    "title": "California Consumer Privacy Act",
-    "summary": "US law granting privacy rights to California residents.",
-    "url": "https://oag.ca.gov/privacy/ccpa",
-    "tags": [
-      "Privacy",
-      "Legal",
-      "PII"
-    ],
-    "families": [
-      "Privacy",
-      "Legal"
-    ],
-    "related": [
-      {
-        "target": "ISO-27701",
-        "type": "aligns"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "id": "HIPAA",
+    "title": "Health Insurance Portability and Accountability Act",
+    "summary": "U.S. law protecting patient health information (PHI).",
+    "url": "https://www.hhs.gov/hipaa",
+    "tags": ["Privacy","Healthcare"],
+    "families": ["Legal","Privacy"],
+    "related":[{"target":"ISO-27701","type":"aligns"}],
+    "jurisdiction":"USA",
+    "enforceability":"Mandatory",
+    "certifiable":false,
+    "auditable":true,
+    "source":"Government",
+    "version":null,
+    "status":"Regulation"
+  },
+  {
+    "id": "FedRAMP",
+    "title": "Federal Risk and Authorization Management Program",
+    "summary": "U.S. government standard for secure cloud service provision.",
+    "url": "https://www.fedramp.gov",
+    "tags": ["Cloud","Govt"],
+    "families": ["Compliance","Security"],
+    "related":[{"target":"NIST-CSF","type":"based_on"}],
+    "jurisdiction":"USA",
+    "enforceability":"Mandatory for federal use",
+    "certifiable":true,
+    "auditable":true,
+    "source":"Government",
+    "version":null,
+    "status":"Approval Framework"
   },
   {
     "id": "NIST-CSF",
     "title": "NIST Cybersecurity Framework",
-    "summary": "Risk-based framework for managing cybersecurity threats.",
+    "summary": "Risk-based cybersecurity best-practice framework from U.S. NIST.",
     "url": "https://www.nist.gov/cyberframework",
-    "tags": [
-      "Security",
-      "Governance"
-    ],
-    "families": [
-      "Cybersecurity",
-      "Governance"
-    ],
-    "related": [
-      {
-        "target": "ISO-27001",
-        "type": "mapped"
-      }
-    ],
-    "jurisdiction": "Global",
-    "enforceability": "Voluntary",
-    "certifiable": false,
-    "auditable": false,
-    "source": "NIST"
-  },
-  {
-    "id": "NIST-SP-800-53",
-    "title": "NIST Security Controls Catalog",
-    "summary": "Detailed security and privacy controls for US federal systems.",
-    "url": "https://www.nist.gov/publications",
-    "tags": [
-      "Security",
-      "Controls"
-    ],
-    "families": [
-      "Cybersecurity",
-      "Governance"
-    ],
-    "related": [
-      {
-        "target": "NIST-CSF",
-        "type": "supplements"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "tags": ["Governance","Security"],
+    "families": ["Cybersecurity","Governance"],
+    "related":[{"target":"ISO-27001","type":"mapped"}],
+    "jurisdiction":"USA",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"NIST",
+    "version":"1.1",
+    "status":"Informative"
   },
   {
     "id": "CIS-Controls",
     "title": "CIS Critical Security Controls",
-    "summary": "Prioritized set of cybersecurity best practices.",
+    "summary": "Prioritized cybersecurity actions mapped to NIST and ISO.",
     "url": "https://www.cisecurity.org/controls",
-    "tags": [
-      "Security",
-      "Benchmark"
+    "tags": ["Benchmark","Security"],
+    "families": ["Cybersecurity","Governance"],
+    "related":[
+      {"target":"NIST-CSF","type":"mapped"},
+      {"target":"ISO-27001","type":"aligned"}
     ],
-    "families": [
-      "Cybersecurity",
-      "Governance"
-    ],
-    "related": [
-      {
-        "target": "NIST-CSF",
-        "type": "mapped"
-      },
-      {
-        "target": "ISO-27001",
-        "type": "aligned"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"CIS",
+    "version":null,
+    "status":"Benchmark"
   },
   {
     "id": "CSA-CCM",
     "title": "Cloud Controls Matrix",
-    "summary": "Cloud control framework mapping across ISO, NIST, PCI.",
+    "summary": "Cloud security control framework mapped across ISO, NIST, PCI.",
     "url": "https://cloudsecurityalliance.org",
-    "tags": [
-      "Cloud",
-      "Controls"
+    "tags": ["Cloud","Controls"],
+    "families": ["Cybersecurity","Compliance"],
+    "related":[
+      {"target":"ISO-27017","type":"mapped"},
+      {"target":"NIST-CSF","type":"mapped"}
     ],
-    "families": [
-      "Compliance",
-      "Cybersecurity"
-    ],
-    "related": [
-      {
-        "target": "ISO-27017",
-        "type": "mapped"
-      },
-      {
-        "target": "NIST-CSF",
-        "type": "mapped"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "FedRAMP",
-    "title": "US Federal Risk and Authorization Management Program",
-    "summary": "US government cloud security assessment framework.",
-    "url": "https://www.fedramp.gov",
-    "tags": [
-      "Government",
-      "Cloud"
-    ],
-    "families": [
-      "Compliance",
-      "Security"
-    ],
-    "related": [
-      {
-        "target": "NIST-CSF",
-        "type": "based_on"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
-  },
-  {
-    "id": "SS-584",
-    "title": "Singapore Multi-Tier Cloud Security",
-    "summary": "Singapore standard for cloud service security.",
-    "url": "https://www.imda.gov.sg",
-    "tags": [
-      "Cloud",
-      "Security",
-      "Regional"
-    ],
-    "families": [
-      "Compliance",
-      "Regional"
-    ],
-    "related": [
-      {
-        "target": "ISO-27017",
-        "type": "aligned"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "jurisdiction":"Global",
+    "enforceability":"Voluntary",
+    "certifiable":false,
+    "auditable":false,
+    "source":"Cloud Security Alliance",
+    "version":null,
+    "status":"Framework"
   },
   {
     "id": "HITRUST-CSF",
     "title": "HITRUST Common Security Framework",
-    "summary": "Health-sector certifiable framework combining HIPAA, ISO, NIST, PCI.",
+    "summary": "Healthcare‑centric certifiable framework combining HIPAA, ISO, NIST, PCI.",
     "url": "https://hitrustalliance.net",
-    "tags": [
-      "Health",
-      "Audit"
+    "tags": ["Healthcare","Audit"],
+    "families": ["Compliance","Healthcare"],
+    "related":[
+      {"target":"HIPAA","type":"integrates"},
+      {"target":"ISO-27001","type":"integrates"}
     ],
-    "families": [
-      "Compliance",
-      "Healthcare"
-    ],
-    "related": [
-      {
-        "target": "HIPAA",
-        "type": "integrates"
-      },
-      {
-        "target": "ISO-27001",
-        "type": "integrates"
-      }
-    ],
-    "jurisdiction": null,
-    "enforceability": null,
-    "certifiable": null,
-    "auditable": null,
-    "source": null
+    "jurisdiction":"USA",
+    "enforceability":"Voluntary",
+    "certifiable":true,
+    "auditable":true,
+    "source":"HITRUST",
+    "version":null,
+    "status":"Certifiable Framework"
   }
 ]

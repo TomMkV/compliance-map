@@ -8,9 +8,11 @@ import { useState } from "react"
 
 interface GraphLegendProps {
   className?: string
+  onFilterRelationship?: (type?: "precedes" | "complementary" | "supersedes" | "overlaps") => void
+  onFilterFamily?: (family?: string) => void
 }
 
-export function GraphLegend({ className }: GraphLegendProps) {
+export function GraphLegend({ className, onFilterRelationship, onFilterFamily }: GraphLegendProps) {
   const [isVisible, setIsVisible] = useState(false)
 
   if (!isVisible) {
@@ -27,14 +29,34 @@ export function GraphLegend({ className }: GraphLegendProps) {
     )
   }
 
+  const rel = (label: string, type: "precedes" | "complementary" | "supersedes" | "overlaps") => (
+    <div className="flex items-center justify-between">
+      <button
+        className="flex items-center gap-2 text-left"
+        onClick={() => onFilterRelationship?.(type)}
+      >
+        {type === "precedes" && <div className="w-6 h-0.5 bg-primary" />}
+        {type === "complementary" && <div className="w-6 h-0.5 bg-accent border-dashed border-t" />}
+        {type === "supersedes" && <div className="w-6 h-0.5 bg-destructive border-dotted border-t-2" />}
+        {type === "overlaps" && <div className="w-6 h-0.5 bg-muted-foreground border-dashed border-t" />}
+        <span className="text-xs">{label}</span>
+      </button>
+    </div>
+  )
+
+  const families = ["Security", "Privacy", "BCM", "ServiceMgmt", "RiskGovernance", "AIGovernance"]
+
   return (
     <Card className={`absolute bottom-4 right-4 w-64 bg-background/95 backdrop-blur-sm ${className}`}>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm">Graph Legend</CardTitle>
-          <Button variant="ghost" size="sm" onClick={() => setIsVisible(false)}>
-            <X className="h-3 w-3" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <button className="text-xs text-muted-foreground hover:underline" onClick={() => { onFilterRelationship?.(undefined); onFilterFamily?.(undefined) }}>Reset</button>
+            <Button variant="ghost" size="sm" onClick={() => setIsVisible(false)}>
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -61,22 +83,10 @@ export function GraphLegend({ className }: GraphLegendProps) {
         <div className="space-y-2">
           <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Relationships</h4>
           <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-0.5 bg-primary"></div>
-              <span className="text-xs">Precedes</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-0.5 bg-accent border-dashed border-t"></div>
-              <span className="text-xs">Complementary</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-0.5 bg-destructive border-dotted border-t-2"></div>
-              <span className="text-xs">Supersedes</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-0.5 bg-muted-foreground border-dashed border-t"></div>
-              <span className="text-xs">Overlaps</span>
-            </div>
+            {rel("Precedes", "precedes")}
+            {rel("Complementary", "complementary")}
+            {rel("Supersedes", "supersedes")}
+            {rel("Overlaps", "overlaps")}
           </div>
         </div>
 
@@ -84,8 +94,8 @@ export function GraphLegend({ className }: GraphLegendProps) {
         <div className="space-y-2">
           <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Control Families</h4>
           <div className="flex flex-wrap gap-1">
-            {["Security", "Privacy", "BCM", "ServiceMgmt", "RiskGovernance", "AIGovernance"].map((family) => (
-              <Badge key={family} variant="outline" className="text-xs">
+            {families.map((family) => (
+              <Badge key={family} variant="outline" className="text-xs cursor-pointer" onClick={() => onFilterFamily?.(family)}>
                 {family}
               </Badge>
             ))}
