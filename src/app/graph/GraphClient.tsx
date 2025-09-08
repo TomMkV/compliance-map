@@ -58,7 +58,14 @@ export default function GraphClient() {
 
       {/* Bottom ribbon + readiness */}
       <div className="border-t border-border bg-card">
-        <PathRibbon path={path} standards={standards} profile={profile} onPathChange={setPath} />
+        <PathRibbon
+          path={path}
+          standards={standards}
+          profile={profile}
+          profiles={profiles}
+          onPathChange={setPath}
+          onProfileChange={(profileId) => setFilters((prev) => ({ ...prev, profile: profileId }))}
+        />
         <ReadinessPanel path={path} standards={standards} profile={profile} />
       </div>
 

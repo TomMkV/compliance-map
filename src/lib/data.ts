@@ -23,6 +23,10 @@ const StandardNodeSchema: z.ZodType<StandardNode> = z.object({
   version: z.string().optional(),
   status: z.enum(['active', 'deprecated', 'superseded']).optional(),
   jurisdiction: z.array(z.string()).optional(),
+  enforceability: z.enum(['Voluntary','Mandatory']).optional(),
+  certifiable: z.boolean().optional(),
+  auditable: z.boolean().optional(),
+  source: z.string().optional(),
   related: z.array(RelatedEdgeSchema),
 });
 
@@ -87,7 +91,7 @@ type ExpandedNode = {
   families?: string[];
   version?: string;
   status?: string;
-  jurisdiction?: string[];
+  jurisdiction?: string[] | string;
   related?: { target: string; type: string; weight?: number; note?: string; description?: string }[];
   // augmented metadata
   enforceability?: string;
@@ -132,11 +136,13 @@ function normalizeExpanded(nodes: ExpandedNode[]): StandardNode[] {
       families: safeFamilies,
       version: versionSanitized,
       status: statusSanitized,
-      jurisdiction: (Array.isArray(n.jurisdiction) ? n.jurisdiction : (n.jurisdiction ? [n.jurisdiction as unknown as string] : undefined)),
+      jurisdiction: (Array.isArray(n.jurisdiction) ? n.jurisdiction : (n.jurisdiction ? [n.jurisdiction as string] : undefined)),
+      enforceability: (n.enforceability === 'Mandatory' || n.enforceability === 'Voluntary') ? n.enforceability : undefined,
+      certifiable: typeof n.certifiable === 'boolean' ? n.certifiable : undefined,
+      auditable: typeof n.auditable === 'boolean' ? n.auditable : undefined,
+      source: (typeof n.source === 'string' && n.source.trim().length > 0) ? n.source : undefined,
       related,
     };
-    // Note: we intentionally do not put augmented metadata into StandardNode to keep the core schema tight.
-    // If needed for UI display later, we can extend StandardNode or add a parallel metadata map.
     return node;
   });
 

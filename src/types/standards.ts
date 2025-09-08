@@ -25,6 +25,11 @@ export interface StandardNode {
   version?: string;
   status?: 'active' | 'deprecated' | 'superseded';
   jurisdiction?: string[];
+  // Optional metadata (from augmented datasets)
+  enforceability?: 'Voluntary' | 'Mandatory';
+  certifiable?: boolean;
+  auditable?: boolean;
+  source?: string;
   related: RelatedEdge[];
 }
 
